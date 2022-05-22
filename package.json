@@ -60,5 +60,5 @@
     "@types/react-query": "^1.2.9",
     "@types/styled-components": "^5.1.24"
   },
-  "homepage": "https://anjin7.github.io/react-challenge3/"
+  "homepage": "https://anjin7.github.io/react-challenge-nomflix/"
 }
