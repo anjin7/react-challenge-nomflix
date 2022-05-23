@@ -346,7 +346,7 @@ function Home() {
                         
                         <BigOverview>
                           {(clickedMovie.genre_ids.map((genre_id) => (
-                            <span> {FindGenre(genre_id)} </span>
+                            <span key={genre_id}> {FindGenre(genre_id)} </span>
                           )))}
                         </BigOverview>
                         
