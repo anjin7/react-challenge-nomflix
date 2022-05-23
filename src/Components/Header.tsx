@@ -38,6 +38,8 @@ const Items = styled.ul`
 
 const Item = styled.li`
   margin-right: 20px;
+  font-weight: 700;
+  font-size: 16px;
   color: ${(props) => props.theme.white.darker};
   transition: color 0.3s ease-in-out;
   position: relative;
