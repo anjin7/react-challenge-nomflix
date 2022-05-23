@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/react-challenge-nomflix/static/js/main.7bd22fa6.js",
+    "main.js": "/react-challenge-nomflix/static/js/main.e52998cb.js",
     "index.html": "/react-challenge-nomflix/index.html",
-    "main.7bd22fa6.js.map": "/react-challenge-nomflix/static/js/main.7bd22fa6.js.map"
+    "main.e52998cb.js.map": "/react-challenge-nomflix/static/js/main.e52998cb.js.map"
   },
   "entrypoints": [
-    "static/js/main.7bd22fa6.js"
+    "static/js/main.e52998cb.js"
   ]
 }
