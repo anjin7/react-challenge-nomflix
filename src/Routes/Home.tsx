@@ -98,6 +98,30 @@ const BigMovie = styled(motion.div)`
   left: 0;
   right: 0;
   margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: ${(props) => props.theme.black.lighter};
+`;
+const BigCover = styled.div`
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  height: 400px;
+`;
+
+const BigTitle = styled.h3`
+  color: ${(props) => props.theme.white.lighter};
+  padding: 20px;
+  font-size: 46px;
+  position: relative;
+  top: -80px;
+`;
+
+const BigOverview = styled.p`
+  padding: 20px;
+  position: relative;
+  top: -80px;
+  color: ${(props) => props.theme.white.lighter};
 `;
 
 const rowVariants = {
@@ -139,6 +163,90 @@ const infoVariants = {
 
 const offset = 6;
 
+const MovieGenres = [
+  {
+    id: 28,
+    name: "Action"
+  },
+  {
+    id: 12,
+    name: "Adventure"
+  },
+  {
+    id: 16,
+    name: "Animation"
+  },
+  {
+    id: 35,
+    name: "Comedy"
+  },
+  {
+    id: 80,
+    name: "Crime"
+  },
+  {
+    id: 99,
+    name: "Documentary"
+  },
+  {
+    id: 18,
+    name: "Drama"
+  },
+  {
+    id: 10751,
+    name: "Family"
+  },
+  {
+    id: 14,
+    name: "Fantasy"
+  },
+  {
+    id: 36,
+    name: "History"
+  },
+  {
+    id: 27,
+    name: "Horror"
+  },
+  {
+    id: 10402,
+    name: "Music"
+  },
+  {
+    id: 9648,
+    name: "Mystery"
+  },
+  {
+    id: 10749,
+    name: "Romance"
+  },
+  {
+    id: 878,
+    name: "Science Fiction"
+  },
+  {
+    id: 10770,
+    name: "TV Movie"
+  },
+  {
+    id: 53,
+    name: "Thriller"
+  },
+  {
+    id: 10752,
+    name: "War"
+  },
+  {
+    id: 37,
+    name: "Western"
+  }
+];
+const FindGenre = (genre_id: number) => {
+  return (
+    MovieGenres.filter(x => x.id === genre_id).map(x => x.name)
+  )
+};
+
 function Home() {
   const history = useHistory();
   const bigMovieMatch = useRouteMatch<{ movieId: string }>("/movies/:movieId");
@@ -163,6 +271,9 @@ function Home() {
     history.push(`/movies/${movieId}`);
   };
   const onOverlayClick = () => history.push("/");
+  const clickedMovie =
+    bigMovieMatch?.params.movieId &&
+    data?.results.find((movie) => movie.id === +bigMovieMatch.params.movieId);
   return (
     <Wrapper>
       {isLoading ? (
@@ -221,7 +332,28 @@ function Home() {
                   style={{ top: scrollY.get() + 100 }}
                   layoutId={bigMovieMatch.params.movieId}
                 >
-                  hello
+                  {clickedMovie && (
+                    <>
+                      <BigCover
+                        style={{
+                          backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
+                            clickedMovie.backdrop_path,
+                            "w500"
+                          )})`,
+                        }}
+                      />
+                        <BigTitle>{clickedMovie.title}</BigTitle>
+                        
+                        <BigOverview>
+                          {(clickedMovie.genre_ids.map((genre_id) => (
+                            <span> {FindGenre(genre_id)} </span>
+                          )))}
+                        </BigOverview>
+                        
+                      <BigOverview>{clickedMovie.overview}</BigOverview>
+                      
+                    </>
+                  )}
                 </BigMovie>
               </>
             ) : null}
