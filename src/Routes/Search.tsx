@@ -14,28 +14,34 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
+const SearchReslut = styled.h2`
+  margin-top: 100px;
+  margin-left: 100px;
+  font-size: 24px;
+  font-weight: 500;
+`;
 
 function Search() {
   const location = useLocation();
   const keyword = new URLSearchParams(location.search).get("keyword");
-  console.log(keyword);
   const { data, isLoading } = useQuery<IGetMoviesResult>(
     ["movies", "nowPlaying"],
     getMovies
   );
-  console.log(data?.results);
-  const SearchMovie = (keyword: string) => {
-    
+  // console.log(data?.results);
+  const SearchMovie = (title:any) => {
+      if (data?.results.find((movie) => movie.title === title)) {
+        return `SEARCH RESULT: ${title}`
+      } else {
+        return `CAN NOT FIND ${title}`
+      }
   };
   return (
     <Wrapper>
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
-        <h2>
-          Search Result : {keyword}
-        </h2>
+        <SearchReslut>{SearchMovie(keyword)}</SearchReslut>
       )}
     </Wrapper>    
   )
