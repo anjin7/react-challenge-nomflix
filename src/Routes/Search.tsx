@@ -2,10 +2,11 @@ import { useQuery } from "react-query";
 import styled from "styled-components";
 import { useLocation } from "react-router";
 import { getMovies, IGetMoviesResult } from "../api";
-import { motion, AnimatePresence } from "framer-motion";
+import { makeImagePath } from "../utils";
+// import { motion, AnimatePresence } from "framer-motion";
 
 const Wrapper = styled.div`
-  background: black;
+  background-color: ${(props) => props.theme.black.veryDark};
   padding-bottom: 200px;
 `;
 const Loader = styled.div`
@@ -14,11 +15,26 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SearchReslut = styled.h2`
-  margin-top: 100px;
-  margin-left: 100px;
+const SearchResult = styled.div`
+  padding-top: 100px;
+  padding-left: 100px;
   font-size: 24px;
   font-weight: 500;
+`;
+const Searched = styled.div`
+  width: 60vw;
+  margin: 20px auto;
+`;
+const SearchedCover = styled.div`
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  height: 600px;
+`;
+const SearchOverview = styled.div`
+  margin-top: 20px;
+  line-height: 1.75;
+  font-size: 18px;
 `;
 
 function Search() {
@@ -31,18 +47,34 @@ function Search() {
   // console.log(data?.results);
   const SearchMovie = (title:any) => {
       if (data?.results.find((movie) => movie.title === title)) {
-        return `SEARCH RESULT: ${title}`
+        return (`SEARCH RESULT: ${title}`)
       } else {
-        return `CAN NOT FIND ${title}`
+        return (`CAN NOT FIND ${title}`)
       }
   };
+
+  const isSearched = data?.results.find((movie) => movie.title === keyword)
+  
   return (
     <Wrapper>
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
-        <SearchReslut>{SearchMovie(keyword)}</SearchReslut>
-      )}
+        <SearchResult>{SearchMovie(keyword)}</SearchResult>
+      )};
+
+      {isSearched ? (
+        <Searched>          
+          <SearchedCover
+            style={{
+              backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
+              isSearched.backdrop_path
+              )})`,
+            }}
+          />
+          <SearchOverview>{isSearched.overview}</SearchOverview>
+        </Searched>
+      ): null}
     </Wrapper>    
   )
 }
