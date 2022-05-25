@@ -119,10 +119,12 @@ const BigTitle = styled.h3`
 `;
 
 const BigOverview = styled.p`
-  padding: 20px;
+  padding: 10px 20px;
   position: relative;
   top: -80px;
   color: ${(props) => props.theme.white.lighter};
+  line-height: 1.75;
+  font-size: 18px;
 `;
 
 const rowVariants = {
@@ -343,14 +345,12 @@ function Home() {
                           )})`,
                         }}
                       />
-                        <BigTitle>{clickedMovie.title}</BigTitle>
-                        
+                        <BigTitle>{clickedMovie.title}</BigTitle>                        
                         <BigOverview>
                           {(clickedMovie.genre_ids.map((genre_id) => (
                             <span key={genre_id}> {FindGenre(genre_id)} </span>
                           )))}
-                        </BigOverview>
-                        
+                        </BigOverview>                        
                       <BigOverview>{clickedMovie.overview}</BigOverview>
                       
                     </>
