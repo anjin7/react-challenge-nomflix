@@ -25,7 +25,7 @@ const Searched = styled.div`
   width: 60vw;
   margin: 20px auto;
 `;
-const SearchedCover = styled.div`
+const SearchCover = styled.div`
   width: 100%;
   background-size: cover;
   background-position: center center;
@@ -65,11 +65,9 @@ function Search() {
 
       {isSearched ? (
         <Searched>          
-          <SearchedCover
+          <SearchCover
             style={{
-              backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-              isSearched.backdrop_path
-              )})`,
+              backgroundImage: `url(${makeImagePath(isSearched.backdrop_path)})`,
             }}
           />
           <SearchOverview>{isSearched.overview}</SearchOverview>
