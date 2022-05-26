@@ -1,10 +1,6 @@
 const API_KEY = "10923b261ba94d897ac6b81148314a3f";
 const BASE_PATH = "https://api.themoviedb.org/3";
 
-// interface IGetGenre {
-//   id: number;
-//   name: string;
-// };
 
 interface IMovie {
   id: number;
@@ -33,8 +29,35 @@ export function getMovies() {
   );
 };
 
-export function getMovieGenres() {
-  return fetch(`${BASE_PATH}/genre/movie/list?api_key=${API_KEY}&language=en-US`).then(
+// export function getMovieGenres() {
+//   return fetch(`${BASE_PATH}/genre/movie/list?api_key=${API_KEY}`).then(
+//     (response) => response.json()
+//   );
+// }
+
+interface ITVShow {
+  id: number;
+  backdrop_path: string;
+  poster_path: string;
+  name: string;
+  overview: string;
+  original_language: string;
+  genre_ids: [];
+};
+
+export interface IGetTVShowResult {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
+  page: number;
+  results: ITVShow[];
+  total_pages: number;
+  total_results: number;
+};
+
+export function getTVShow() {
+  return fetch(`${BASE_PATH}/tv/popular?api_key=${API_KEY}`).then(
     (response) => response.json()
   );
 }
