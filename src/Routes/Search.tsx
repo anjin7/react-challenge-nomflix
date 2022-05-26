@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { useLocation } from "react-router";
-import { getMovies, IGetMoviesResult } from "../api";
+import { getMovies, getSearch, IGetMoviesResult, IGetSearchResult } from "../api";
 import { makeImagePath } from "../utils";
 // import { motion, AnimatePresence } from "framer-motion";
 
@@ -44,7 +44,7 @@ function Search() {
     ["movies", "nowPlaying"],
     getMovies
   );
-  // console.log(data?.results);
+  console.log(data?.results);
   const SearchMovie = (title:any) => {
       if (data?.results.find((movie) => movie.title === title)) {
         return (`SEARCH RESULT: ${title}`)
